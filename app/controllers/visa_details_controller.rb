@@ -26,12 +26,12 @@ class VisaDetailsController < ApplicationController
     #binding.pry
     respond_to do |format|
       if @visa_detail.save
-        if params[:visa_detail][:duration_ids].present?
+        if  params[:visa_detail].present? && params[:visa_detail][:duration_ids].present?
           durations = Duration.find params[:visa_detail][:duration_ids]
           @visa_detail.durations = durations
         end
 
-        if params[:user][:relationship_ids].present?
+        if params[:user].present? && params[:user].fetch(:relationship_ids).present?
           @relationships = Relationship.where(:id => params[:user][:relationship_ids])
           @visa_detail.user.relationships << @relationships
         end
