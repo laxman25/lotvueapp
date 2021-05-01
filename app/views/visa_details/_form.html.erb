@@ -367,13 +367,11 @@
                       <span> <b> 9 </b> </span> Relationship status
                     </label>
                   </div>
-                  <div class="col-sm-9">
+                  <div class="col-sm-12">
                     <% for relation in Relationship.all %>
                         <% relationships = visa_detail.user.relationships rescue [] %>
-                        <div>
                           <%= check_box_tag "user[relationship_ids][]", relation.id, relationships.include?(relation) %>
                           <%= relation.display_name %>
-                        </div>
                     <% end %>
                   </div>
           </div>
