@@ -1,0 +1,390 @@
+<%= form_for visa_detail do |form| %>
+    <% if visa_detail.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(visa_detail.errors.count, "error") %> prohibited this visa_detail from being saved:</h2>
+
+          <ul>
+            <% visa_detail.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="LeftContent">
+            <div class="grid">
+              <div class="row" style="width: 40em;height: 22em">
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <span><p>Please use a pen and write neatly in English using BLOCK LETTERS.</p></span>
+                      <span>
+                        <p>
+                          Tick Where Appilcable
+                          <%= form.check_box :used_pen %>
+                        </p>
+                      </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-check-label" for="defaultCheck1">
+                  <span><b> 1 </b></span> Indicate if you are applying outside Australia or in Australia:
+                </label>
+
+                <div class="row">
+                  <div class="col-sm-4" style="text-align: right">
+                    Outside Australia
+                  </div>
+                  <div class="col-sm-6">
+                    <%= form.check_box :outside_country %>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4" style="text-align: right">
+                    In Australia
+                  </div>
+                  <div class="col-sm-6">
+                    <%= form.check_box :inside_country %>
+                  </div>
+                </div>
+              </div>
+
+              <br/>
+
+              <div class="row">
+                <span class="text-center" style="padding-left:  20px"><p><b><h6>Applicants outside Australia</h6></b></p></span>
+              </div>
+
+              <br/>
+
+              <div class="form-group">
+                <label for="exampleFormControlInput1">
+                  <b> 2 </b> When do you wish to visit Australia? </label>
+
+                <div class="row">
+                  <label class="control-label col-sm-2" for="date">
+                    Date
+                  </label>
+
+                  <div class="col-sm-4">
+                    <div class="input-group">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar">
+                        </i>
+                      </div>
+                      <%= form.text_field :visiting_from, placeholder: "DD/MM/YYYY" %>
+                    </div>
+                  </div>
+                  <span class="toField">to</span>
+
+                  <div class="col-sm-4">
+                    <div class="input-group">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar">
+                        </i>
+                      </div>
+                      <%= form.text_field :visiting_to, placeholder: "DD/MM/YYYY" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">
+                  <spnan><b> 3 </b></spnan>
+                  How long do you wish stay in Australia</label>
+                <br/>
+                <% for duration in Duration.all %>
+                    <% durations = visa_detail.durations rescue [] %>
+                    <div>
+                      <%= duration.display_name %>
+                      <%= check_box_tag "visa_detail[duration_ids][]", duration.id, durations.include?(duration) %><br/>
+                    </div>
+                <% end %>
+                <br/>
+                <spnan><b> Note: </b> The stay period granted may be less than period requested. You should check the
+                  terms of any visa granted.
+                </spnan>
+              </div>
+
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">
+                  <spnan><b> 4 </b></spnan>
+                  How long do you wish stay in Australia</label><br/>
+
+                <div class="row">
+                  <div class="col-sm-1" style="text-align: right">
+                    NO
+                  </div>
+                  <div class="col-sm-6">
+                    <%= form.radio_button :is_more_occasion, false %>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-1" style="text-align: right">
+                    Yes
+                  </div>
+                  <div class="col-sm-6">
+                    <%= form.radio_button :is_more_occasion, true %>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <%= form.text_area :types_of_occasion, cols: 40, rows: 4, class: "form-control" %>
+                </div>
+              </div>
+
+              <div class="row">
+                <span class="text-center" style="padding-left:  20px"><p><b><h6>Applicants In Australia</h6></b></p></span>
+              </div>
+
+
+              <br/>
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-7">
+                    <label for="exampleFormControlInput1">
+                      <span> <b> 5 </b> </span> Specify the date you wish to extend stay to
+                    </label>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="input-group">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar">
+                        </i>
+                      </div>
+                      <%= form.text_field :date_of_extend, placeholder: "DD/MM/YYYY" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">
+                  <spnan><b> 3 </b></spnan>
+                  Provide detailed rasons for requesting this further stay </label>
+
+                <div class="form-group">
+                  <%= form.text_area :detailed_description, cols: 40, rows: 10, class: "form-control" %>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <%= form.fields_for :user  do |user| %>
+              <div class="rightContent">
+                <div class="grid">
+                  <div class="row">
+                    <div class="card" style="width: 18em;height: 20em;">
+                      <div class="card-body">
+                        <h5 class="card-title">Photo Graph</h5>
+
+                        <p class="card-text">Please attach you recent passport size of your photograph.</p>
+                        <%= user.file_field :image_file %>
+                      </div>
+                    </div>
+                  </div>
+                  <br/>
+
+                  <div class="row">
+                    <span class="text-center"><p><b><h4>Part A - Your Details</h4></b></p></span>
+                  </div>
+
+                  <div class="form-check">
+                    <label class="form-check-label" for="defaultCheck1">
+                      <span><b> 7 </b></span>
+                      Give the following deatils exactly as they appear in your passport.<br/>
+                      make sure your passport is valid forthe period of stay you are applying for
+                    </label>
+
+                    <div class="row" style="margin-bottom: 3px">
+                      <div class="col-sm-3">
+                        <label class="form-check-label" for="defaultCheck1">
+                          Family Name
+                        </label>
+                      </div>
+                      <div class="col-sm-9">
+                        <%= user.text_field :family_name %>
+                      </div>
+                    </div>
+
+                    <div class="row" style="margin-bottom: 3px">
+                      <div class="col-sm-3">
+                        <label class="form-check-label" for="defaultCheck1">
+                          Given Names
+                        </label>
+                      </div>
+                      <div class="col-sm-9">
+                        <%= user.text_area :given_names, cols: 40, rows: 3, class: "form-control" %>
+                      </div>
+                    </div>
+
+                    <div class="row" style="margin-bottom: 3px">
+                      <div class="col-sm-4">
+                        <label class="form-check-label" for="defaultCheck1">
+                          Sex
+                        </label>
+                      </div>
+                      <div class="col-sm-2">
+                        Male
+                        <%= user.radio_button :gender, 'male' %>
+                      </div>
+                      <div class="col-sm-4">
+                        Female
+                        <%= user.radio_button :gender, 'female' %>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="row" style="margin-bottom: 3px">
+                    <div class="col-sm-3">
+                      <label class="form-check-label" for="defaultCheck1">
+                        Date of Borth
+                      </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <%= user.text_field :date_of_birth %>
+                    </div>
+                  </div>
+
+                  <div class="row" style="margin-bottom: 3px">
+                    <div class="col-sm-3">
+                      <label class="form-check-label" for="defaultCheck1">
+                        Passport Number
+                      </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <%= user.text_field :passport_number %>
+                    </div>
+                  </div>
+
+                  <div class="row" style="margin-bottom: 3px">
+                    <div class="col-sm-3">
+                      <label class="form-check-label" for="defaultCheck1">
+                        Country of Passport
+                      </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <%= user.text_field :country_of_passport %>
+                    </div>
+                  </div>
+
+                  <div class="row" style="margin-bottom: 3px">
+                    <div class="col-sm-3">
+                      <label class="form-check-label" for="defaultCheck1">
+                        Nationality Of passport holder
+                      </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <%= user.text_field :passport_nationality %>
+                    </div>
+                  </div>
+
+                  <div class="row" style="margin-bottom: 3px">
+                    <div class="col-sm-3">
+                      <label class="form-check-label" for="defaultCheck1">
+                        Date Of Issue
+                      </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <%= user.text_field :date_of_issue %>
+                    </div>
+                  </div>
+
+                  <div class="row" style="margin-bottom: 3px">
+                    <div class="col-sm-3">
+                      <label class="form-check-label" for="defaultCheck1">
+                        Date of expired
+                      </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <%= user.text_field :date_of_expired %>
+                    </div>
+                  </div>
+
+                  <div class="row" style="margin-bottom: 3px">
+                    <div class="col-sm-3">
+                      <label class="form-check-label" for="defaultCheck1">
+                        Place of issue/Issuing Authority
+                      </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <%= user.text_area :issueing_authority %>
+                    </div>
+                  </div>
+          <% end %>
+
+                  <div class="row">
+                    <label class="form-check-label" for="defaultCheck1">
+                      <span> <b> 8 </b> </span> Place of birth
+                    </label>
+                  </div>
+
+                  <div class="row" style="margin-bottom: 3px">
+                    <div class="col-sm-3">
+                      <label class="form-check-label" for="defaultCheck1">
+                        Town/City
+                      </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <%= form.text_field :name_of_city %>
+                    </div>
+                  </div>
+
+                  <div class="row" style="margin-bottom: 3px">
+                    <div class="col-sm-3">
+                      <label class="form-check-label" for="defaultCheck1">
+                        State/Providence
+                      </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <%= form.text_field :name_of_state %>
+                    </div>
+                  </div>
+
+                  <div class="row" style="margin-bottom: 3px">
+                    <div class="col-sm-3">
+                      <label class="form-check-label" for="defaultCheck1">
+                        Country
+                      </label>
+                    </div>
+                    <div class="col-sm-9">
+                      <%= form.text_field :name_of_country %>
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <label class="form-check-label" for="defaultCheck1">
+                      <span> <b> 9 </b> </span> Relationship status
+                    </label>
+                  </div>
+                  <div class="col-sm-9">
+                    <% for relation in Relationship.all %>
+                        <% relationships = visa_detail.user.relationships rescue [] %>
+                        <div>
+                          <%= check_box_tag "user[relationship_ids][]", relation.id, relationships.include?(relation) %>
+                          <%= relation.display_name %>
+                        </div>
+                    <% end %>
+                  </div>
+          </div>
+          </div>
+          <br/>
+
+          <div class="row text-center">
+            <div class="actions" style="margin-top: 275px">
+              <%= form.submit %>
+            </div>
+          </div>
+        </div>
+
+<% end %>
