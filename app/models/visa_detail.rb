@@ -10,4 +10,6 @@ class VisaDetail < ApplicationRecord
 
   validates :types_of_occasion, presence: true, if: Proc.new { |vd| vd.is_more_occasion}
 
+  mount_uploader :image, ImageUploader
+
 end

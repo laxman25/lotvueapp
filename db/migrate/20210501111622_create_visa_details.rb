@@ -4,13 +4,13 @@ class CreateVisaDetails < ActiveRecord::Migration[6.1]
       t.boolean   :used_pen
       t.boolean   :outside_country
       t.boolean   :inside_country
-      t.date      :visiting_from
-      t.date      :visiting_to
+      t.string      :visiting_from
+      t.string      :visiting_to
       t.boolean   :is_more_occasion
       t.text      :types_of_occasion
-      t.date      :date_of_extend
+      t.string      :date_of_extend
       t.text      :detailed_description
-      t.string    :image_file
+      t.string    :image
       t.string    :name_of_city
       t.string    :name_of_state
       t.string    :name_of_country

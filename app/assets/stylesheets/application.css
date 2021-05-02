@@ -15,6 +15,8 @@
  *= require_self
  */
 
+@import "bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.css";
+
 .radio input[type="radio"],
 .radio-inline input[type="radio"],
 .checkbox input[type="checkbox"],
@@ -28,13 +30,19 @@ input, textarea {
 }
 
 input[type="checkbox"] {
-    background-color: #FFEBCD;
+    background-color: #FFEBCD !important;
 }
 
 .form-control {
-    background-color: #FFEBCD;
+    background-color: #FFEBCD !important;
 }
 
 .card {
-    background-color: #FFEBCD;
+    background-color: #FFEBCD !important;
+}
+
+
+
+.textWidth{
+    width: 100%
 }

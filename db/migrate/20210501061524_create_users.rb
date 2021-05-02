@@ -5,12 +5,12 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string    :family_name
       t.text      :given_names
       t.string    :gender
-      t.date      :date_of_birth
+      t.string      :date_of_birth
       t.integer   :passport_number
       t.string    :country_of_passport
       t.string    :passport_nationality
-      t.date      :date_of_issue
-      t.date      :date_of_expired
+      t.string      :date_of_issue
+      t.string      :date_of_expired
       t.text      :issueing_authority
     end
   end

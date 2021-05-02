@@ -9,7 +9,7 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "bootstrap"
 import "../stylesheets/application"
-import './bootstrap_custom.js'
+import "bootstrap-datepicker"
 
 
 document.addEventListener("turbolinks:load", () => {
@@ -17,13 +17,15 @@ document.addEventListener("turbolinks:load", () => {
     $('[data-toggle="popover"]').popover()
 })
 
-
+$(document).ready(function(){
+    $('.datepicker').datepicker();
+});
 //
 //Rails.start()
 //Turbolinks.start()
 //ActiveStorage.start()
 
-
+$('.datepicker').datepicker({ format: 'mm/dd/yyyy', startDate: '-3d' });
 
 
 

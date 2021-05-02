@@ -76,7 +76,7 @@ class VisaDetailsController < ApplicationController
     def visa_detail_params
       params.require(:visa_detail).permit(:used_pen,:outside_country,
                                           :inside_country, :visiting_from, :visiting_to, :is_more_occasion, :types_of_occasion,
-                                          :date_of_extend, :detailed_description, :name_of_city, :name_of_state, :name_of_country, duration_ids: [:id],
+                                          :date_of_extend, :detailed_description, :image, :name_of_city, :name_of_state, :name_of_country, duration_ids: [:id],
                                           user_attributes: [:family_name, :given_names, :date_of_birth, :passport_number, :country_of_passport, :passport_nationality,
                                                   :date_of_issue, :date_of_expired, :ssueing_authority])
 
